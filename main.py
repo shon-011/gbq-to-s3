@@ -2,12 +2,14 @@ from google.cloud import bigquery
 from notification import slack_post
 import os
 import datetime
+import sys
+
 def query_ga():
-  dir = 'your_dir'
+  dir = sys.argv[1]
   project = 'your_gcp_projectid'
 
   # auth
-  credentials_json = f'/home/{dir}/client_credentials.json'
+  credentials_json = f'{dir}/client_credentials.json'
   os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_json
   client = bigquery.Client(project=project)
   now = datetime.datetime.now()
